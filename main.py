@@ -47,25 +47,17 @@ scoreCard.goto(0,260)
 scoreCard.write("Player A:{}  Player B:{}".format(player_1,player_2),align="center",font=("Courier",24,"normal"))
 # paddle upward movement function
 def paddle_1_up():
-    y = paddle_1.ycor()
-    y += 20
-    paddle_1.sety(y)
+    paddle_1.sety(paddle_1.ycor()+20)
 
 def paddle_2_up():
-    y = paddle_2.ycor()
-    y += 20
-    paddle_2.sety(y)
+    paddle_2.sety(paddle_2.ycor()+20)
 
 # paddle downward movement function
 def paddle_1_down():
-    y = paddle_1.ycor()
-    y -= 20
-    paddle_1.sety(y)
+    paddle_1.sety(paddle_1.ycor()-20)
 
 def paddle_2_down():
-    y = paddle_2.ycor()
-    y -= 20
-    paddle_2.sety(y)
+    paddle_2.sety(paddle_2.ycor()-20)
 
 # keyboard binding
 window.listen()
@@ -73,6 +65,7 @@ window.onkeypress(paddle_1_up, "w")
 window.onkeypress(paddle_1_down, "s")
 window.onkeypress(paddle_2_up, "Up")
 window.onkeypress(paddle_2_down, "Down")
+
 #game main function loop
 while True:
     window.update()
@@ -87,6 +80,7 @@ while True:
     if ball.ycor() < -290:
         ball.sety(-290)
         ball.dy *= -1
+
     # side boder settings
     if ball.xcor() > 390:
         ball.goto(0,0)
@@ -99,7 +93,8 @@ while True:
         ball.dx *= -1 
         player_2 +=1
         scoreCard.clear()
-        scoreCard.write("Player A: {}  Player B: {}".format(player_1,player_2),align="center",font=("Courier",24,"normal"))  
+        scoreCard.write("Player A: {}  Player B: {}".format(player_1,player_2), align="center",font=("Courier",24,"normal"))  
+
     # paddle and ball collision points
     if (ball.xcor() > 340 and ball.xcor()<350) and (ball.ycor()<paddle_2.ycor()+50 and ball.ycor()>paddle_2.ycor()-50):
         ball.setx(340)
@@ -109,3 +104,5 @@ while True:
         ball.setx(-340)
         ball.dx *=-1
         winsound.PlaySound("sound.mp3",winsound.SND_ASYNC)
+
+    
